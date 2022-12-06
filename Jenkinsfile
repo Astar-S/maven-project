@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Get some code from a GitHub repository
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hchoi36/maven-project.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/yuqis/maven-project.git']]])
         
             }
         }  
@@ -35,8 +35,8 @@ pipeline {
         	    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
               }
 
-              sh "docker tag webapp:v${BUILD_NUMBER} hchoi36/webapp:v${BUILD_NUMBER}"
-              sh "docker push hchoi36/webapp:v${BUILD_NUMBER}"
+              sh "docker tag webapp:v${BUILD_NUMBER} yuqis/webapp:v${BUILD_NUMBER}"
+              sh "docker push yuqis/webapp:v${BUILD_NUMBER}"
 
             }
         }
@@ -44,7 +44,7 @@ pipeline {
         stage('Run the webapp container') {
             steps {
 
-              sh "docker run --name webapp_v${BUILD_NUMBER} -p 8088:5000 -d hchoi36/webapp:v${BUILD_NUMBER}"
+              sh "docker run --name webapp_v${BUILD_NUMBER} -p 8088:5000 -d yuqis/webapp:v${BUILD_NUMBER}"
 
             }
         }
