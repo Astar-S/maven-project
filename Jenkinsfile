@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Get some code from a GitHub repository
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hchoi36/maven-project.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Astar-S/maven-project.git']]])
         
             }
         }  
@@ -36,7 +36,7 @@ pipeline {
               }
 
               sh "docker tag webapp:v${BUILD_NUMBER} yuqis/webapp:v${BUILD_NUMBER}"
-              sh "docker push hchoi36/webapp:v${BUILD_NUMBER}"
+              sh "docker push yuqis/webapp:v${BUILD_NUMBER}"
 
             }
         }
